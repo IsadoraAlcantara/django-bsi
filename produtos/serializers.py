@@ -22,3 +22,11 @@ class ProdutoSerializer(ModelSerializer):
         if value <= Decimal("0"):
             raise ValidationError("O preço deve ser maior que zero.")
         return value
+
+    def validate_marca(self, value):
+        marca_limpo = value.strip()
+        if len(marca_limpo) < 2:
+            raise ValidationError(
+                "O nome deve possuir pelo menos 2 caracteres."
+            )
+        return marca_limpo
