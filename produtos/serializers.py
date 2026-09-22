@@ -8,7 +8,7 @@ from .models import Produto
 class ProdutoSerializer(ModelSerializer):
     class Meta:
         model = Produto
-        fields = ("id", "nome", "preco", "marca")
+        fields = ("id", "nome", "preco", "marca", "estoque")
 
     def validate_nome(self, value):
         nome_limpo = value.strip()
@@ -30,3 +30,9 @@ class ProdutoSerializer(ModelSerializer):
                 "O nome deve possuir de 2 à 50 caracteres."
             )
         return marca_limpo
+
+    def validate_estoque(self, value):
+        if value <= Decimal("0"):
+            raise ValidationError("O preço deve ser maior que zero.")
+        return value
+    # PAREI AQUI, CORRIGIR O "Decimal("0")"
