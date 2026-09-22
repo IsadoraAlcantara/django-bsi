@@ -13,5 +13,5 @@ class ProdutoViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filterset_class = ProdutoFilter
     ordering_fields = ("nome", "preco", "marca")
-    ordering = ("id",)
+    ordering = ("id")
     search_fields = ("nome", "marca")

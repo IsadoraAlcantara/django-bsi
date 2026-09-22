@@ -8,7 +8,7 @@ from .models import Produto
 class ProdutoSerializer(ModelSerializer):
     class Meta:
         model = Produto
-        fields = ("id", "nome", "preco")
+        fields = ("id", "nome", "preco", "marca")
 
     def validate_nome(self, value):
         nome_limpo = value.strip()
@@ -25,8 +25,8 @@ class ProdutoSerializer(ModelSerializer):
 
     def validate_marca(self, value):
         marca_limpo = value.strip()
-        if len(marca_limpo) < 2:
+        if len(marca_limpo) < 2 or len(marca_limpo) > 50:
             raise ValidationError(
-                "O nome deve possuir pelo menos 2 caracteres."
+                "O nome deve possuir de 2 à 50 caracteres."
             )
         return marca_limpo
