@@ -32,7 +32,6 @@ class ProdutoSerializer(ModelSerializer):
         return marca_limpo
 
     def validate_estoque(self, value):
-        if value <= Decimal("0"):
-            raise ValidationError("O preço deve ser maior que zero.")
+        if value < Decimal("0"):
+            raise ValidationError("O estoque deve ser igual ou maior que zero.")
         return value
-    # PAREI AQUI, CORRIGIR O "Decimal("0")"
